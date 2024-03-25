@@ -1,0 +1,31 @@
+.side-checkout {
+    width: 20%;
+    height: 50%;
+    background-color: #f5f5f5;
+    position: absolute;
+    right: 3%;
+    border-radius: 8px;
+    
+}
+
+.table-checkout {
+   padding: 16px;
+}
+
+.total {
+    padding: 16px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.checkout-button {
+    width: 100%;
+    padding: 16px;
+    background-color: #3d6f43;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
