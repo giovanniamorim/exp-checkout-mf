@@ -1,51 +1,63 @@
 import React, { useState } from 'react';
-import './Checkout.css';
+import './Checkout.css'; // Importe o arquivo CSS para estilização
+import  Parcel from 'single-spa-react/parcel'
 
+const Checkout = () => {
+    const user = {
+        email: 'john.doe@example.com',
+        phone: '123-456-7890',
+    };
+    const [paymentMethod, setPaymentMethod] = useState('');
 
-
-function Checkout() {
-    const [items, setItems] = useState([
-        { id: 1, name: 'Product 1', price: 10, quantity: 1 },
-        { id: 2, name: 'Product 2', price: 20, quantity: 2 },
-        { id: 3, name: 'Product 3', price: 30, quantity: 3 }
-    ]);
-
-    const calculateTotal = () => {
-        let total = 0;
-        items.forEach(item => {
-            total += item.price * item.quantity;
-        });
-        return total;
+    const handlePaymentMethodChange = (event) => {
+        setPaymentMethod(event.target.value);
     };
 
+
     return (
-        <div className="side-checkout">
-            <table className='table-checkout'>
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {items.map(item => (
-                        <tr key={item.id}>
-                            <td>{item.name}</td>
-                            <td>{item.price}</td>
-                            <td>{item.quantity}</td>
-                            <td>{item.price * item.quantity}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            <div className='total'>
-            <p>Total: {calculateTotal()}</p>
-            <button className='checkout-button'>Finalize Checkout</button>
+        <div className='checkout-container'>
+            <section className='checkout-section checkout-info'>
+                <h1>Checkout</h1>
+                <hr />
+                <h2>Contact information</h2>
+                <form>
+                    <label>
+                        Email
+                        <input type='email' name='email' value={user.email} readOnly />
+                    </label>
+                    <label>
+                        Phone
+                        <input type='tel' name='phone' value={user.phone} readOnly />
+                    </label>
+                </form>
+                <button>Save</button>
+            </section>
+            <section className='checkout-section checkout-payment'>
+                <h2>Payment</h2>
+                <p>All transactions are secure and encrypted.</p>
+                <div className='payment-methods'>
+                    <label>
+                        <input type='radio' name='payment-method' value='credit_card' onChange={handlePaymentMethodChange} />
+                        Credit card
+                    </label>
+                    <label>
+                        <input type='radio' name='payment-method' value='paypal' onChange={handlePaymentMethodChange} />
+                        PayPal
+                    </label>
+                    <label>
+                        <input type='radio' name='payment-method' value='stripe' onChange={handlePaymentMethodChange} />
+                        Stripe
+                    </label>
+                </div>
+            </section>
+            <section>
+            <div>
+                <Parcel config={() => System.import('@experian/exp-cart-mf')} />
             </div>
+                </section>
         </div>
     );
-}
+};
 
 export default Checkout;
+
